@@ -20,8 +20,9 @@ export default new VueRouter({
       },
     },
     {
-      path: "/search",
+      path: "/search/:searchText",
       component: Search,
+      name: "Search",
       meta: {
         showFooter: true,
       },

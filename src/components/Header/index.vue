@@ -32,7 +32,7 @@
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input type="text" id="autocomplete" class="input-error input-xxlarge" />
+          <input v-model="searchInput" type="text" id="autocomplete" class="input-error input-xxlarge" />
           <button class="sui-btn btn-xlarge btn-danger" type="button" @click="searchHandler">搜索</button>
         </form>
       </div>
@@ -42,12 +42,14 @@
 
 <script>
 export default {
-  created() {
-    console.log(this.$route);
+  data() {
+    return { searchInput: "" };
   },
   methods: {
     searchHandler() {
-      this.$router.push("/search");
+      // this.$router.push("/search");
+      // this.$router.push({ path: "/search", query: { searchText: this.searchInput } });
+      this.$router.push({ name: "Search", params: { searchText: this.searchInput } });
     },
   },
 };

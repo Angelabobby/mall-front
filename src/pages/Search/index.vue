@@ -1,15 +1,13 @@
 <template>
-  <div>
-    Search
-  </div>
+  <div>Search</div>
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {
+  created() {
+    console.log((this.$route.params.searchText));
+  },
+};
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
