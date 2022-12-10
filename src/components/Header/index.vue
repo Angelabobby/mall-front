@@ -42,6 +42,9 @@
 
 <script>
 export default {
+  created() {
+    console.log(this.$route);
+  },
   methods: {
     searchHandler() {
       this.$router.push("/search");
