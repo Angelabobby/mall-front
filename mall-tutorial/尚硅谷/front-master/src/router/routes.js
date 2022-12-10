@@ -33,7 +33,7 @@ component: () => import('@/pages/Search')
 export default [
   {
     path: '/',
-    component: () => import('@/pages/Home')
+    component: () => import('@/pages/Home/index.vue')
   },
   {
     name: 'search',  // 是当前路由的标识名称
