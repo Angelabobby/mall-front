@@ -31,7 +31,7 @@ requests.interceptors.response.use(
     // 对响应数据做点什么
 
     nProgress.done(); // 进度条结束
-    return res;
+    return res.data;
   },
   (error) => {
     // 超出 2xx 范围的状态码都会触发该函数。
