@@ -1,6 +1,9 @@
 // axios的二次封装
 
 import axios from "axios";
+// 引入nprogress 加入进度条功能 start()进度条开始，done()进度条结束
+import nProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 const requests = axios.create({
   baseURL: "/api",
@@ -11,6 +14,8 @@ const requests = axios.create({
 requests.interceptors.request.use(
   (config) => {
     // 在发送请求之前做些什么
+
+    nProgress.start(); // 进度条开始
     return config;
   },
   (error) => {
@@ -24,6 +29,8 @@ requests.interceptors.response.use(
   (res) => {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
+
+    nProgress.done(); // 进度条结束
     return res;
   },
   (error) => {
