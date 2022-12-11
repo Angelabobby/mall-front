@@ -16,6 +16,14 @@ export default {
     Header,
     Footer,
   },
+  watch: {
+    $route: {
+      handler(value) {
+        console.log(value);
+      },
+      immediate: true,
+    },
+  },
 };
 </script>
 

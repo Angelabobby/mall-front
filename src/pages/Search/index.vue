@@ -3,11 +3,7 @@
 </template>
 
 <script>
-export default {
-  created() {
-    console.log((this.$route.params.searchText));
-  },
-};
+export default {};
 </script>
 
 <style lang="less" scoped></style>

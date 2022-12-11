@@ -50,6 +50,7 @@ export default {
     searchHandler() {
       // this.$router.push("/search");
       // this.$router.push({ path: "/search", query: { searchText: this.searchInput } });
+      if (this.searchInput === "") return;
       this.$router.push({ name: "Search", params: { searchText: this.searchInput } });
     },
   },

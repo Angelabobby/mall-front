@@ -30,16 +30,10 @@ export default new VueRouter({
     {
       path: "/login",
       component: Login,
-      meta: {
-        showFooter: false,
-      },
     },
     {
       path: "/register",
       component: Register,
-      meta: {
-        showFooter: false,
-      },
     },
     // 重定向
     {
