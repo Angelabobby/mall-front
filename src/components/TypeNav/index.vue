@@ -15,7 +15,14 @@
       </nav>
       <div class="sort">
         <div class="all-sort-list2">
-          <div class="item" v-for="(c1, i1) in categoryList" :key="c1.categoryId">
+          <div
+            class="item"
+            v-for="(c1, i1) in categoryList"
+            :key="c1.categoryId"
+            :class="{ activeItem: currentIndex === i1 }"
+            @mouseenter="changeIndex(i1)"
+            @mouseleave="resetIndex"
+          >
             <h3>
               <a href="">{{ c1.categoryName }}</a>
             </h3>
@@ -46,6 +53,21 @@ import { mapState } from "vuex";
 export default {
   mounted() {
     this.$store.dispatch("categoryList");
+  },
+
+  data() {
+    return {
+      currentIndex: -1,
+    };
+  },
+
+  methods: {
+    changeIndex(index) {
+      this.currentIndex = index;
+    },
+    resetIndex() {
+      this.currentIndex = -1;
+    },
   },
 
   computed: {
@@ -169,6 +191,10 @@ export default {
               display: block;
             }
           }
+        }
+
+        .activeItem {
+          background: skyblue;
         }
       }
     }
