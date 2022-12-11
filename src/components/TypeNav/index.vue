@@ -21,19 +21,22 @@
             :key="c1.categoryId"
             :class="{ activeItem: currentIndex === i1 }"
             @mouseenter="changeIndex(i1)"
+            @click="goSearch"
           >
             <h3>
-              <a href="">{{ c1.categoryName }}</a>
+              <a :data-categoryname="c1.categoryName" :data-category1id="c1.categoryId">{{ c1.categoryName }}</a>
             </h3>
             <div class="item-list clearfix" :style="{ display: currentIndex === i1 ? 'block' : 'none' }">
               <div class="subitem">
                 <dl class="fore" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
                   <dt>
-                    <a href="">{{ c2.categoryName }}</a>
+                    <a :data-categoryname="c2.categoryName" :data-category2id="c2.categoryId">{{ c2.categoryName }}</a>
                   </dt>
                   <dd>
                     <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                      <a href="">{{ c3.categoryName }}</a>
+                      <a :data-categoryname="c3.categoryName" :data-category3id="c3.categoryId">{{
+                        c3.categoryName
+                      }}</a>
                     </em>
                   </dd>
                 </dl>
@@ -53,31 +56,47 @@ import { throttle } from "lodash";
 
 export default {
   mounted() {
+    // 挂载后，发送请求获取三级联动的树形数据
     this.$store.dispatch("categoryList");
   },
 
   data() {
     return {
+      // 三级联动，当前所选的index
       currentIndex: -1,
     };
   },
 
   methods: {
-    // changeIndex(index) {
-    //   this.currentIndex = index;
-    //   console.log(index);
-    // },
+    // 三级联动，修改当前所选的index；使用throttle节流函数，优化JS性能、提高用户体验和
     changeIndex: throttle(function (index) {
       this.currentIndex = index;
-      console.log(index);
     }, 50),
+
+    // 三级联动，重置当前所选的index
     resetIndex() {
       this.currentIndex = -1;
-      console.log("out");
+    },
+
+    // 三级联动，点击跳转到search并携带参数；使用事件委托，在父元素监听
+    goSearch(event) {
+      const location = { name: "Search" };
+      const { categoryname, category1id, category2id, category3id } = event.target.dataset;
+      const query = { categoryname };
+      if (category1id) {
+        query.category1id = category1id;
+      } else if (category2id) {
+        query.category2id = category2id;
+      } else if (category3id) {
+        query.category3id = category3id;
+      }
+      location.query = query;
+      this.$router.push(location);
     },
   },
 
   computed: {
+    // 从Vuex中state的数据映射到组件自身，方便引用
     ...mapState({ categoryList: (state) => state.home.categoryList }),
   },
 };
@@ -192,12 +211,6 @@ export default {
               }
             }
           }
-
-          // &:hover {
-          //   .item-list {
-          //     display: block;
-          //   }
-          // }
         }
 
         .activeItem {
