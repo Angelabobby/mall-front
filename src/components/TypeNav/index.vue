@@ -14,14 +14,13 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
-        <div class="all-sort-list2">
+        <div class="all-sort-list2" @mouseleave="resetIndex">
           <div
             class="item"
             v-for="(c1, i1) in categoryList"
             :key="c1.categoryId"
             :class="{ activeItem: currentIndex === i1 }"
             @mouseenter="changeIndex(i1)"
-            @mouseleave="resetIndex"
           >
             <h3>
               <a href="">{{ c1.categoryName }}</a>
@@ -50,6 +49,8 @@
 <script>
 import { mapState } from "vuex";
 
+import { throttle } from "lodash";
+
 export default {
   mounted() {
     this.$store.dispatch("categoryList");
@@ -62,11 +63,17 @@ export default {
   },
 
   methods: {
-    changeIndex(index) {
+    // changeIndex(index) {
+    //   this.currentIndex = index;
+    //   console.log(index);
+    // },
+    changeIndex: throttle(function (index) {
       this.currentIndex = index;
-    },
+      console.log(index);
+    }, 50),
     resetIndex() {
       this.currentIndex = -1;
+      console.log("out");
     },
   },
 
