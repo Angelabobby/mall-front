@@ -1693,7 +1693,12 @@
 </template>
 
 <script>
-export default {};
+import { reqCategoryList } from "@/api";
+export default {
+  created() {
+    reqCategoryList();
+  },
+};
 </script>
 
 <style lang="less" scoped>
