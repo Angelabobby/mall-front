@@ -7,8 +7,11 @@ Vue.use(Vuex);
 import home from "./home";
 import search from "./search";
 
+const actions = {
+  
+}
+
 export default new Vuex.Store({
-  state: { name: "store" },
   modules: {
     home,
     search,

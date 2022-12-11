@@ -1693,10 +1693,9 @@
 </template>
 
 <script>
-import { reqCategoryList } from "@/api";
 export default {
-  created() {
-    reqCategoryList();
+  mounted() {
+    this.$store.dispatch("");
   },
 };
 </script>

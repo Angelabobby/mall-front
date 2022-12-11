@@ -1,5 +1,9 @@
 // Home模块
 
+const actions = {
+  
+};
+
 export default {
-  state: { name: "home" },
+  actions,
 };
